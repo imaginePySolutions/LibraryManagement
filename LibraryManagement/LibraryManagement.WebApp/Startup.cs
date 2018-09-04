@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using LibraryManagement.Core.BookManagement;
 using LibraryManagement.Persistance;
+using LibraryManagement.Persistance.Repos;
+using LibraryManagement.WebApp.BookManagementApi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,11 +29,17 @@ namespace LibraryManagement.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddScoped<IBookRepo,BookRepo>();
+            services.AddScoped<IBookService,BookService>();
+            services.AddScoped<IAuthorRepo,AuthorRepo>();
+            services.AddScoped<IReadModelDatabase,ReadModelDatabase>();
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
+
             services.AddDbContext<LibraryDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Default"))
             );
-            
+
+            services.AddAutoMapper();
             services.AddMvc();
             services.AddSpaStaticFiles(configuration =>
             {
