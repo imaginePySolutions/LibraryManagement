@@ -31,14 +31,16 @@ namespace LibraryManagement.WebApp.BookManagementApi
 
         public async Task<IEnumerable<BookListDto>> GetBooks()
         {
-            var books = await _context.Books
-                                        .ToListAsync();
+            var books = await _service.GetBook(); 
 
-             if(books == null)
-                throw new Exception($"No Books yet Created");      
+            return _mapper.Map<List<Book>,List<BookListDto>>(books).ToList();                  
+        }
 
-
-              return _mapper.Map<List<Book>,List<BookListDto>>(books).ToList();                  
+        [HttpPost]
+        public async Task<IActionResult> CreateBook([FromBody] BookDetailDto model)
+        {
+            await _service.NewBook(model.Name,model.AuthorId);
+            return Ok();
         }
     }
 }

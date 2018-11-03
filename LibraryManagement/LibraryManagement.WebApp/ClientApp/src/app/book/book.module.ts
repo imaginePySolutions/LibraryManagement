@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { BookService } from './services/book.service';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { BookFormComponent } from './components/book-form/book-form.component';
 
 
 
@@ -12,7 +13,7 @@ import { BookListComponent } from './components/book-list/book-list.component';
     exports: [
         BookListComponent
     ],
-    declarations: [BookListComponent],
+    declarations: [BookListComponent, BookFormComponent],
     providers: [
         BookService
     ],

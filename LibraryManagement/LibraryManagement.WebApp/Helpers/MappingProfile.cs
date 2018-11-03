@@ -10,6 +10,7 @@ namespace LibraryManagement.WebApp.Helpers
         {
             CreateMap<Book,BookListDto>();
             CreateMap<Book,BookDetailDto>(); 
+            CreateMap<Author,AuthorDto>();
         }
     }
 }
